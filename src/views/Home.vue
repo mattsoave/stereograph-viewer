@@ -1,16 +1,18 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <ul>
-      <li v-for="photo in photos" :key="photo.photos.left">{{photo.photos}}</li>
+    <ul class="photo-thumbnails">
+      <li v-for="photo in photos" :key="photo.id">
+        <router-link :to="`/photo/${photo.id}`">
+          <img :src="`/photos/${photo.photos.left}`" />
+        </router-link>
+      </li>
     </ul>
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
 import photos from '@/assets/photos';
 
 export default {
@@ -21,7 +23,18 @@ export default {
     };
   },
   components: {
-    HelloWorld,
   },
 };
 </script>
+
+<style scoped lang="scss">
+  .photo-thumbnails {
+    li {
+      display: inline-block;
+      margin-right: 5px;
+    }
+    img {
+      width: 100px;
+    }
+  }
+</style>
